@@ -22,6 +22,7 @@ def main():
     pygame.init()
     clock = pygame.time.Clock()
     dt = 0
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -33,6 +34,11 @@ def main():
         for object in asteroids:
             if object.collision_check(player):
                 return print("Game Over!")
+        for asteroid in asteroids:
+            for shot in shots:
+                if shot.collision_check(asteroid):
+                    asteroid.split()
+                    shot.kill()
         pygame.display.flip()
         clock.tick(60)
         dt = clock.tick(60) / 1000
